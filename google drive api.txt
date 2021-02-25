@@ -1,0 +1,59 @@
+﻿
+google drive api
+ID   client_id
+1079055607192-vvagdah2qfmm1farqq70bl4ffbtnsnsq.apps.googleusercontent.com
+密钥 client_secret
+t4T91F_78l6fP2EzS2Ck4d6o
+
+团队盘目录  0ACfEJndGM5NRUk9PVA
+
+gdb:
+
+type = drive
+client_id = 1079055607192-vvagdah2qfmm1farqq70bl4ffbtnsnsq.apps.googleusercontent.com
+client_secret = t4T91F_78l6fP2EzS2Ck4d6o
+scope = drive
+root_folder_id = 0ACfEJndGM5NRUk9PVA
+token = {"access_token":"ya29.a0AfH6SMAnF6fmR7ulLkBFs0LxyF89esMQB6ELD07yfiM6EvSeusMzUHDpUCwUSFe61ayBa4HXMfP_oAPy9pPOof6qofMFtUcFe2HnLEk4wW-OwZvhArriKVdvnnCxBfmy6BtiGTnhdy9TkeVQCayiFX2vDMWQ-uucHAY","token_type":"Bearer","refresh_token":"1//064PpB7BiadMxCgYIARAAGAYSNwF-L9IrkJ32g0HPQ4VHTL82ybvOvepGXX0f8046icBm9GnQQUu_ls-xAIWK5m18R6eu6sqhejU","expiry":"2020-06-13T12:34:14.3535502+08:00"}
+team_drive = 0ACfEJndGM5NRUk9PVA
+
+
+
+rclone mount gdb:/ /root/GoogleDrive --copy-links --no-gzip-encoding --no-check-certificate --allow-other --allow-non-empty --umask 000
+
+nohup /usr/bin/rclone mount gphotos:/ /root/gphotos --copy-links --no-gzip-encoding --no-check-certificate --allow-other --allow-non-empty --umask 000 &
+
+ /usr/bin/rclone mount gdb:/ /root/GoogleDrive --copy-links --no-gzip-encoding --no-check-certificate --allow-other --allow-non-empty --umask 000 &
+
+
+ok
+
+ /usr/bin/rclone mount gdb: /root/GoogleDrive --allow-other --allow-non-empty --cache-dir /home/tmp --vfs-cache-mode writes 
+
+mkdir -p /root/GoogleDrive
+
+fusermount -qzu /root/GoogleDrive
+
+
+载gd
+/volume3/wangpan/gdb/
+
+ /usr/bin/rclone mount gdb: /volume3/wangpan/gdb/ --allow-other --allow-non-empty --cache-dir /home/tmp --vfs-cache-mode writes
+
+挂载gp
+/volume3/wangpan/gp
+
+/usr/bin/rclone mount gp:media/by-month/ /volume3/wangpan/gp --allow-other --allow-non-empty --vfs-cache-mode writes
+
+/volume3/wangpan/onedrive
+/usr/bin/rclone mount onedrive: /volume3/wangpan/onedrive  --allow-other --allow-non-empty --vfs-cache-mode writes
+
+cs
+/usr/bin/rclone mount gp:media/by-month/ /volume3/wangpan/gp --allow-other --allow-non-empty --buffer-size 32M --vfs-read-chunk-size=32M --vfs-read-chunk-size-limit 2048M --vfs-cache-mode writes --dir-cache-time 96h --daemon
+
+ /usr/bin/rclone mount gdb: /volume3/wangpan/gdb/ --allow-other --allow-non-empty --buffer-size 32M --vfs-read-chunk-size=32M --vfs-read-chunk-size-limit 2048M --vfs-cache-mode writes --dir-cache-time 96h --daemon
+
+
+/usr/bin/rclone sync gp:media/by-month/2020/ /volume3/lsgphotos/2020 --transfers 32 --checkers 64
+
+nohup /usr/bin/rclone sync gp:media/by-month/2020/ /volume3/lsgphotos/2020 > /dev/null 2>&1 &
